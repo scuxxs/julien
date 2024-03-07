@@ -1,7 +1,7 @@
 from pyspark.sql import SparkSession
 import pandas as pd
 from pyspark.sql.functions import col, expr, concat, countDistinct, to_timestamp, year, count, to_date, month, \
-    weekofyear
+    weekofyear, lit
 from pyspark.sql.types import StructType, ArrayType, StringType, StructField, IntegerType, BooleanType, FloatType
 
 # Driver
@@ -31,5 +31,11 @@ schema = StructType([
 
 # 创建DataFrame
 student_df = spark.createDataFrame([], schema)
+student_df = student_df.withColumn("college", lit("数据学院"))
+student_df = student_df.withColumn("late_level", lit(0))
+student_df = student_df.withColumn("cheat_level", lit(0))
+student_df = student_df.withColumn("poverty_levle", lit(0))
+student_df = student_df.withColumn("polo", lit(0))
+
 
 student_df.printSchema()
